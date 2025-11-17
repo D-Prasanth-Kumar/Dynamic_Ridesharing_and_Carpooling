@@ -10,7 +10,7 @@ public class RegisterRequest {
 
     private String role;
 
-    private RegisterRequest() {}
+    public RegisterRequest() {}
 
     public String getName() {
         return name;
