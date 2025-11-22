@@ -6,10 +6,7 @@ import com.project.ridesharing.dto.RegisterRequest;
 import com.project.ridesharing.dto.RegisterResponse;
 import com.project.ridesharing.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -31,6 +28,27 @@ public class AuthController {
             return ResponseEntity.status(409).body(re.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("server error");
+        }
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@RequestParam String email,
+                                       @RequestParam String otp) {
+        try {
+            String msg = userService.verifyOtp(email, otp);
+            return ResponseEntity.ok(msg);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/resend-otp")
+    public ResponseEntity<?> resendOtp(@RequestParam String email) {
+        try {
+            String message = userService.resendOtp(email);
+            return ResponseEntity.ok(message);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 

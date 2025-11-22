@@ -1,0 +1,63 @@
+package com.project.ridesharing.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "bookings")
+public class Booking {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "passenger_id")
+    private User passenger;
+
+    @ManyToOne
+    @JoinColumn(name = "ride_id")
+    private Ride ride;
+
+    private int seatsBooked = 1;
+
+    private LocalDateTime bookingTime = LocalDateTime.now();
+
+    public Booking() { }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(User passenger) {
+        this.passenger = passenger;
+    }
+
+    public Ride getRide() {
+        return ride;
+    }
+
+    public void setRide(Ride ride) {
+        this.ride = ride;
+    }
+
+    public int getSeatsBooked() {
+        return seatsBooked;
+    }
+
+    public void setSeatsBooked(int seatsBooked) {
+        this.seatsBooked = seatsBooked;
+    }
+
+    public LocalDateTime getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(LocalDateTime bookingTime) {
+        this.bookingTime = bookingTime;
+    }
+}

@@ -22,6 +22,10 @@ public class Ride {
     private LocalDate date;
     private LocalTime time;
 
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+
     private int availableSeats;
 
     public Ride() { }
@@ -72,6 +76,14 @@ public class Ride {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     public int getAvailableSeats() {

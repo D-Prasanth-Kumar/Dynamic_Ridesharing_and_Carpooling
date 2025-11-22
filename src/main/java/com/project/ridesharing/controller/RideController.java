@@ -3,6 +3,7 @@ package com.project.ridesharing.controller;
 import com.project.ridesharing.dto.RideRequest;
 import com.project.ridesharing.dto.RideResponse;
 import com.project.ridesharing.security.JwtUtil;
+import com.project.ridesharing.service.BookingService;
 import com.project.ridesharing.service.RideService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 public class RideController {
     private final RideService rideService;
     private final JwtUtil jwtUtil;
+    private final BookingService bookingService;
 
-    public RideController(RideService rideService, JwtUtil jwtUtil) {
+    public RideController(RideService rideService,BookingService bookingService, JwtUtil jwtUtil) {
         this.rideService = rideService;
+        this.bookingService = bookingService;
         this.jwtUtil = jwtUtil;
     }
 
@@ -41,6 +44,31 @@ public class RideController {
 
         return ResponseEntity.ok(
                 rideService.searchRides(source, destination, date)
+        );
+    }
+
+    @GetMapping("/my-rides")
+    public ResponseEntity<?> getMyRides(
+            @RequestHeader("Authorization") String authHeader) {
+
+        String token = authHeader.substring(7);
+
+        String driverUsername = jwtUtil.getUsernameFromToken(token);
+
+        return ResponseEntity.ok(rideService.getMyRides(driverUsername));
+    }
+
+    @GetMapping("/{rideId}/bookings")
+    public ResponseEntity<?> getBookingsForRide(
+            @RequestHeader("Authorization") String authHeader,
+            @PathVariable Long rideId) {
+
+        String token = authHeader.substring(7);
+
+        String driverUsername = jwtUtil.getUsernameFromToken(token);
+
+        return ResponseEntity.ok(
+                bookingService.getBookingsForRide(rideId, driverUsername)
         );
     }
 }

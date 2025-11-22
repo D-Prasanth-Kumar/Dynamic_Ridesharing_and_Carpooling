@@ -7,5 +7,10 @@ import com.project.ridesharing.dto.RegisterResponse;
 
 public interface UserService {
     RegisterResponse registerUser(RegisterRequest request);
+
     LoginResponse loginUser(LoginRequest request);
+
+    String verifyOtp(String email, String otp);
+
+    String resendOtp(String email);
 }

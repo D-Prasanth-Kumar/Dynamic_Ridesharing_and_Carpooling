@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-sans: "Inter", sans-serif;
+
+  
+  --color-brand-purple: 124 58 237;
+  --color-brand-blue: 37 99 235;
+  --color-accent-orange: 249 115 22; 
+
+  /* Light Mode */
+  --color-page: 248 250 252;      
+  --color-card: 255 255 255;      
+  --color-txt-main: 15 23 42;     
+  --color-txt-dim: 71 85 105;     
+  --color-txt-muted: 148 163 184; 
+}
+
+.dark {
+  /* Dark Mode */
+  --color-page: 15 23 42;         
+  --color-card: 30 41 59;         
+  --color-txt-main: 248 250 252;  
+  --color-txt-dim: 148 163 184;   
+  --color-txt-muted: 100 116 139; 
+}
+
+body {
+  background-color: rgb(var(--color-page));
+  color: rgb(var(--color-txt-main));
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* Route Line for FindRide.jsx */
+.route-line {
+  position: absolute;
+  left: 23px;
+  top: 36px;
+  bottom: 36px;
+  width: 2px;
+  background-image: linear-gradient(to bottom, rgb(var(--color-txt-muted)) 50%, transparent 50%);
+  background-size: 2px 8px;
+  background-repeat: repeat-y;
+  z-index: 0;
+}
