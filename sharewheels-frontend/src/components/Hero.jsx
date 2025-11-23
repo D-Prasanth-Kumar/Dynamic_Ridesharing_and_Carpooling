@@ -41,7 +41,7 @@ export default function Hero() {
             className="flex-1 h-14 rounded-full bg-[rgb(var(--color-page))] hover:bg-gray-100 dark:hover:bg-gray-800 text-[rgb(var(--color-txt-main))] font-bold transition flex items-center justify-center gap-3 w-full sm:w-auto border border-transparent hover:border-brand-blue/30"
           >
             <MapPin className="text-brand-blue" size={20} />
-            <span>I need a ride</span>
+            <span>Find a ride</span>
           </button>
 
           <div className="hidden sm:block w-px h-8 bg-gray-300 dark:bg-gray-700"></div>
@@ -51,7 +51,7 @@ export default function Hero() {
             className="flex-1 h-14 rounded-full bg-[rgb(var(--color-txt-main))] text-[rgb(var(--color-page))] font-semibold hover:opacity-90 transition flex items-center justify-center gap-3 w-full sm:w-auto"
           >
             <Car size={20} />
-            <span>I have a car</span>
+            <span>Share a ride</span>
           </button>
         </div>
 
