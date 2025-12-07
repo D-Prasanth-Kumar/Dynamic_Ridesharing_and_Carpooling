@@ -54,7 +54,7 @@ export default function RegisterVehicle() {
        
         <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-brand-purple/20 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-        {/* Card */}
+        
         <div className="relative w-full max-w-md bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-8 shadow-xl backdrop-blur-xl transition-colors">
 
           <div className="text-center mb-8">
@@ -84,7 +84,10 @@ export default function RegisterVehicle() {
                 required
                 value={formData.model}
                 onChange={handleChange}
-                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg px-4 py-3 text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-dim))] focus:border-brand-purple/50 focus:outline-none transition-all"
+                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg pl-4 pr-4 py-3 
+                          text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-dim))] 
+                          focus:border-brand-purple/50 focus:ring-1 focus:ring-brand-purple/50 
+                          focus:outline-none transition-all"
                 placeholder="e.g., Toyota Camry"
               />
             </div>
@@ -99,7 +102,10 @@ export default function RegisterVehicle() {
                 required
                 value={formData.licensePlate}
                 onChange={handleChange}
-                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg px-4 py-3 text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-dim))] focus:border-brand-purple/50 focus:outline-none transition-all"
+                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg pl-4 pr-4 py-3 
+                          text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-dim))] 
+                          focus:border-brand-purple/50 focus:ring-1 focus:ring-brand-purple/50 
+                          focus:outline-none transition-all"
                 placeholder="e.g., KA-01-AB-1234"
               />
             </div>
@@ -117,7 +123,10 @@ export default function RegisterVehicle() {
                 required
                 value={formData.capacity}
                 onChange={handleChange}
-                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg px-4 py-3 text-[rgb(var(--color-txt-main))] focus:border-brand-purple/50 focus:outline-none transition-all"
+                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg pl-4 pr-4 py-3 
+                          text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-dim))] 
+                          focus:border-brand-purple/50 focus:ring-1 focus:ring-brand-purple/50 
+                          focus:outline-none transition-all"
               />
             </div>
 

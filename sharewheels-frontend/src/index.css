@@ -11,7 +11,9 @@
 
   /* Light Mode */
   --color-page: 248 250 252;      
-  --color-card: 255 255 255;      
+  --color-card: 255 255 255;   
+  --color-input: 241 245 249;
+
   --color-txt-main: 15 23 42;     
   --color-txt-dim: 71 85 105;     
   --color-txt-muted: 148 163 184; 
@@ -20,7 +22,9 @@
 .dark {
   /* Dark Mode */
   --color-page: 15 23 42;         
-  --color-card: 30 41 59;         
+  --color-card: 30 41 59;        
+  --color-input: 51 65 85;
+
   --color-txt-main: 248 250 252;  
   --color-txt-dim: 148 163 184;   
   --color-txt-muted: 100 116 139; 
@@ -44,7 +48,7 @@ body {
   box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
 }
 
-/* Route Line for FindRide.jsx */
+
 .route-line {
   position: absolute;
   left: 23px;

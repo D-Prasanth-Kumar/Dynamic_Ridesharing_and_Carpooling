@@ -92,6 +92,13 @@ export default function MyBookings() {
                       Status: <span className="text-emerald-500">Confirmed</span>
                     </div>
                   </div>
+
+                  {ride.totalFare && (
+                    <div className="flex items-center gap-2 mt-4">
+                        <span className="text-txt-main font-bold">₹{Math.round(ride.totalFare)}</span>
+                        <span className="text-xs bg-gray-100 dark:bg-white/10 px-2 py-0.5 rounded text-txt-dim">Paid</span>
+                    </div>
+                )}
                 </div>
 
               </div>

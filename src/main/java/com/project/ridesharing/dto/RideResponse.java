@@ -3,11 +3,18 @@ package com.project.ridesharing.dto;
 public class RideResponse {
     private Long id;
     private String driverName;
+    private String driverPhone;
+    private String vehicleModel;
+    private String vehiclePlate;
     private String source;
     private String destination;
     private String date;
     private String time;
     private int availableSeats;
+
+    private Double distanceKm;
+    private Double pricePerKm;
+    private Double totalFare;
 
     public RideResponse() { }
 
@@ -26,6 +33,15 @@ public class RideResponse {
     public void setDriverName(String driverName) {
         this.driverName = driverName;
     }
+
+    public String getDriverPhone() { return driverPhone; }
+    public void setDriverPhone(String driverPhone) { this.driverPhone = driverPhone; }
+
+    public String getVehicleModel() { return vehicleModel; }
+    public void setVehicleModel(String vehicleModel) { this.vehicleModel = vehicleModel; }
+
+    public String getVehiclePlate() { return vehiclePlate; }
+    public void setVehiclePlate(String vehiclePlate) { this.vehiclePlate = vehiclePlate; }
 
     public String getSource() {
         return source;
@@ -65,5 +81,29 @@ public class RideResponse {
 
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
+    }
+
+    public Double getDistanceKm() {
+        return distanceKm;
+    }
+
+    public void setDistanceKm(Double distanceKm) {
+        this.distanceKm = distanceKm;
+    }
+
+    public Double getPricePerKm() {
+        return pricePerKm;
+    }
+
+    public void setPricePerKm(Double pricePerKm) {
+        this.pricePerKm = pricePerKm;
+    }
+
+    public Double getTotalFare() {
+        return totalFare;
+    }
+
+    public void setTotalFare(Double totalFare) {
+        this.totalFare = totalFare;
     }
 }

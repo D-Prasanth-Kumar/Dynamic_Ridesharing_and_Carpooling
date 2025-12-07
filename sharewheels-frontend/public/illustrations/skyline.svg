@@ -1,0 +1,95 @@
+<svg
+  width="1440"
+  height="400"
+  viewBox="0 0 1440 400"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Soft background gradient -->
+  <defs>
+    <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="400">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#f5f7ff" stop-opacity="0.9" />
+    </linearGradient>
+
+    <linearGradient id="buildingLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d7ddf0" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#c3c9e0" stop-opacity="0.9" />
+    </linearGradient>
+
+    <linearGradient id="buildingDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c3c9e0" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#a9b0cc" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background sky -->
+  <rect width="1440" height="400" fill="url(#skyGradient)" />
+
+  <!-- Far background hills / shapes -->
+  <path
+    d="M0 260C160 230 260 230 420 260C580 290 760 300 940 280C1120 260 1280 220 1440 230V400H0V260Z"
+    fill="#e3e7f5"
+    fill-opacity="0.6"
+  />
+  <path
+    d="M0 280C140 260 300 270 460 290C620 310 820 320 1000 305C1180 290 1310 260 1440 260V400H0V280Z"
+    fill="#dde2f4"
+    fill-opacity="0.7"
+  />
+
+  <!-- Building row 1 (farther, lighter) -->
+  <g opacity="0.45">
+    <rect x="80"  y="110" width="70"  height="190" rx="4" fill="url(#buildingLight)" />
+    <rect x="180" y="90"  width="80"  height="210" rx="4" fill="url(#buildingLight)" />
+    <rect x="300" y="120" width="60"  height="180" rx="4" fill="url(#buildingLight)" />
+    <rect x="390" y="80"  width="75"  height="220" rx="4" fill="url(#buildingLight)" />
+    <rect x="500" y="130" width="65"  height="170" rx="4" fill="url(#buildingLight)" />
+    <rect x="600" y="95"  width="90"  height="205" rx="4" fill="url(#buildingLight)" />
+    <rect x="720" y="115" width="70"  height="185" rx="4" fill="url(#buildingLight)" />
+    <rect x="820" y="85"  width="80"  height="215" rx="4" fill="url(#buildingLight)" />
+    <rect x="940" y="120" width="60"  height="180" rx="4" fill="url(#buildingLight)" />
+    <rect x="1030" y="100" width="70" height="200" rx="4" fill="url(#buildingLight)" />
+    <rect x="1130" y="85"  width="80" height="215" rx="4" fill="url(#buildingLight)" />
+    <rect x="1250" y="115" width="70" height="185" rx="4" fill="url(#buildingLight)" />
+  </g>
+
+  <!-- Building row 2 (closer, slightly darker) -->
+  <g opacity="0.65">
+    <rect x="120" y="140" width="70"  height="190" rx="4" fill="url(#buildingDark)" />
+    <rect x="230" y="150" width="65"  height="180" rx="4" fill="url(#buildingDark)" />
+    <rect x="330" y="145" width="75"  height="185" rx="4" fill="url(#buildingDark)" />
+    <rect x="450" y="135" width="68"  height="195" rx="4" fill="url(#buildingDark)" />
+    <rect x="560" y="150" width="72"  height="180" rx="4" fill="url(#buildingDark)" />
+    <rect x="670" y="140" width="70"  height="190" rx="4" fill="url(#buildingDark)" />
+    <rect x="780" y="145" width="80"  height="185" rx="4" fill="url(#buildingDark)" />
+    <rect x="910" y="150" width="70"  height="180" rx="4" fill="url(#buildingDark)" />
+    <rect x="1010" y="140" width="75" height="190" rx="4" fill="url(#buildingDark)" />
+    <rect x="1125" y="150" width="70" height="180" rx="4" fill="url(#buildingDark)" />
+    <rect x="1230" y="145" width="68" height="185" rx="4" fill="url(#buildingDark)" />
+  </g>
+
+  <!-- Small windows as subtle dots -->
+  <g opacity="0.35">
+    <!-- Just sprinkle windows on a few buildings -->
+    <circle cx="200" cy="120" r="3" fill="#ffffff" />
+    <circle cx="200" cy="140" r="3" fill="#ffffff" />
+    <circle cx="200" cy="160" r="3" fill="#ffffff" />
+
+    <circle cx="415" cy="115" r="3" fill="#ffffff" />
+    <circle cx="415" cy="135" r="3" fill="#ffffff" />
+    <circle cx="415" cy="155" r="3" fill="#ffffff" />
+
+    <circle cx="620" cy="120" r="3" fill="#ffffff" />
+    <circle cx="620" cy="140" r="3" fill="#ffffff" />
+    <circle cx="620" cy="160" r="3" fill="#ffffff" />
+
+    <circle cx="845" cy="115" r="3" fill="#ffffff" />
+    <circle cx="845" cy="135" r="3" fill="#ffffff" />
+    <circle cx="845" cy="155" r="3" fill="#ffffff" />
+
+    <circle cx="1155" cy="120" r="3" fill="#ffffff" />
+    <circle cx="1155" cy="140" r="3" fill="#ffffff" />
+    <circle cx="1155" cy="160" r="3" fill="#ffffff" />
+  </g>
+</svg>

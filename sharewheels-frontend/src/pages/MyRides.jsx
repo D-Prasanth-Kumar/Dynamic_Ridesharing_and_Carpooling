@@ -52,7 +52,7 @@ export default function MyRides() {
 
       <div className="max-w-4xl mx-auto w-full px-6 pt-32 pb-12">
 
-        {/* Page Header */}
+        
         <div className="flex items-center gap-4 mb-10">
           <div className="w-12 h-12 bg-brand-purple/20 rounded-full flex items-center justify-center text-brand-purple">
             <Car size={24} />

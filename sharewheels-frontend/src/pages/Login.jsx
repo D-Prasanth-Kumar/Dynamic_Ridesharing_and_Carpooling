@@ -45,7 +45,7 @@ export default function Login() {
         
         <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-brand-purple/30 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-        {/* Login Card */}
+        {/* Login */}
         <div className="relative w-full max-w-md bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-8 shadow-2xl backdrop-blur-xl z-10 transition-colors">
 
           <div className="text-center mb-8">
@@ -75,8 +75,8 @@ export default function Login() {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg px-4 py-3 text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-muted))] focus:outline-none focus:border-brand-purple/50 transition-all"
-                placeholder="johndoe"
+                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg px-4 py-3 text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-muted))]focus:outline-none focus:border-brand-purple/50 transition-all"
+                placeholder="Enter your username"
               />
             </div>
 
@@ -90,12 +90,12 @@ export default function Login() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg px-4 py-3 text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-muted))] focus:outline-none focus:border-brand-purple/50 transition-all"
-                placeholder="••••••••"
+                className="w-full bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-lg px-4 py-3 text-[rgb(var(--color-txt-main))] placeholder-[rgb(var(--color-txt-muted))]focus:outline-none focus:border-brand-purple/50 transition-all"
+                placeholder="Enter your password"
               />
             </div>
 
-            {/* Login Button */}
+            
             <button
               type="submit"
               disabled={isLoading}
@@ -113,7 +113,7 @@ export default function Login() {
 
           </form>
 
-          {/* Footer */}
+          
           <div className="mt-6 text-center text-sm text-[rgb(var(--color-txt-dim))]">
             Don't have an account?{" "}
             <Link

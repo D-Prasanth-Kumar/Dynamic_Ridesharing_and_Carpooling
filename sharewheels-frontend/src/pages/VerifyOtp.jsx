@@ -39,10 +39,7 @@ export default function VerifyOtp() {
 
       <div className="flex-1 flex items-center justify-center relative px-6">
 
-       
-        <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-emerald-500/20 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-
-        {/* Card */}
+  
         <div className="relative w-full max-w-md bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-8 shadow-xl backdrop-blur-xl transition-colors">
 
           <div className="text-center mb-8">

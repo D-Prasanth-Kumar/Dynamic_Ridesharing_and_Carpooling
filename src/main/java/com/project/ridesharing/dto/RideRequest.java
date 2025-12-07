@@ -10,6 +10,10 @@ public class RideRequest {
 
     private int availableSeats;
 
+    private Double pricePerKm;
+
+    private String stops;
+
     public RideRequest() { }
 
     public String getSource() {
@@ -51,5 +55,16 @@ public class RideRequest {
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
     }
+
+    public Double getPricePerKm() {
+        return pricePerKm;
+    }
+
+    public void setPricePerKm(Double pricePerKm) {
+        this.pricePerKm = pricePerKm;
+    }
+
+    public String getStops() { return stops; }
+    public void setStops(String stops) { this.stops = stops; }
 
 }

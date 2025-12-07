@@ -48,7 +48,7 @@ export default function Register() {
         
         <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-brand-blue/20 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-        {/* Card */}
+        
         <div className="relative w-full max-w-lg bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-8 shadow-xl backdrop-blur-xl transition-colors">
 
           <div className="text-center mb-8">
@@ -63,35 +63,58 @@ export default function Register() {
             </div>
           )}
 
-          {/* Role Selection */}
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <button
-              type="button"
-              onClick={() => setRole("PASSENGER")}
-              className={`flex items-center justify-center gap-2 py-3 rounded-lg border transition-all ${
-                role === "PASSENGER"
-                  ? "bg-brand-purple/20 border-brand-purple text-brand-purple"
-                  : "bg-white/5 text-[rgb(var(--color-txt-dim))] hover:bg-white/10"
-              }`}
-            >
-              <User size={18} /> Passenger
-            </button>
+          
+          <div className="mb-6">
+            <label className="block text-xs font-medium text-[rgb(var(--color-txt-muted))] uppercase mb-2">
+              Select Role
+            </label>
 
-            <button
-              type="button"
-              onClick={() => setRole("DRIVER")}
-              className={`flex items-center justify-center gap-2 py-3 rounded-lg border transition-all ${
-                role === "DRIVER"
-                  ? "bg-brand-blue/20 border-brand-blue text-brand-blue"
-                  : "bg-white/5 text-[rgb(var(--color-txt-dim))] hover:bg-white/10"
-              }`}
-            >
-              <Car size={18} /> Driver
-            </button>
+            <div className="relative w-full bg-white/10 border border-gray-300/30 rounded-xl p-1 flex items-center">
+
+              
+              <div
+                className={`absolute top-1 bottom-1 w-1/2 rounded-lg transition-all duration-300 ${
+                  role === "DRIVER"
+                    ? "translate-x-full"
+                    : "translate-x-0"
+                }`}
+                style={{
+                  backgroundColor: role === "DRIVER" ? "#2563eb20" : "#7c3aed20",
+                  boxShadow: `0 0 8px ${
+                    role === "DRIVER" ? "#2563eb40" : "#7c3aed40"
+                  }`,
+                }}
+              />
+
+              
+              <button
+                type="button"
+                onClick={() => setRole("PASSENGER")}
+                className="relative flex-1 py-3 text-sm font-semibold rounded-lg z-10 transition-all"
+                style={{
+                  color: role === "PASSENGER" ? "#7c3aed" : "rgb(var(--color-txt-dim))",
+                }}
+              >
+                Passenger
+              </button>
+
+              
+              <button
+                type="button"
+                onClick={() => setRole("DRIVER")}
+                className="relative flex-1 py-3 text-sm font-semibold rounded-lg z-10 transition-all"
+                style={{
+                  color: role === "DRIVER" ? "#2563eb" : "rgb(var(--color-txt-dim))",
+                }}
+              >
+                Driver
+              </button>
+
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
 
+          <form onSubmit={handleSubmit} className="space-y-4">
           
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -168,7 +191,7 @@ export default function Register() {
 
           </form>
 
-          {/* Footer */}
+          
           <div className="mt-6 text-center text-sm text-[rgb(var(--color-txt-dim))]">
             Already have an account?{" "}
             <Link to="/login" className="text-brand-purple hover:text-brand-blue transition-colors">

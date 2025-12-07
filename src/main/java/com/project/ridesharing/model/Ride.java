@@ -28,6 +28,13 @@ public class Ride {
 
     private int availableSeats;
 
+    private Double distanceKm;
+    private Double pricePerKm;
+    private Double totalFare;
+
+    @Column(length = 500)
+    private String stops;
+
     public Ride() { }
 
     public Long getId() {
@@ -93,4 +100,16 @@ public class Ride {
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
     }
+
+    public Double getDistanceKm() { return distanceKm; }
+    public void setDistanceKm(Double distanceKm) { this.distanceKm = distanceKm; }
+
+    public Double getPricePerKm() { return pricePerKm; }
+    public void setPricePerKm(Double pricePerKm) { this.pricePerKm = pricePerKm; }
+
+    public Double getTotalFare() { return totalFare; }
+    public void setTotalFare(Double totalFare) { this.totalFare = totalFare; }
+
+    public String getStops() { return stops; }
+    public void setStops(String stops) { this.stops = stops; }
 }

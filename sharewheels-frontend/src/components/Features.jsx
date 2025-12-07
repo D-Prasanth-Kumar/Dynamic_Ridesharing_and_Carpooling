@@ -25,7 +25,7 @@ export default function Features() {
   ];
 
   return (
-    <section className="relative py-24 px-6 overflow-hidden bg-[rgb(var(--color-page))] transition-colors">
+    <section className="relative py-24 px-6 overflow-hidden bg-gradient-to-b from-white to-blue-50/40 transition-colors">
       
       {/* Background visual */}
       <div
@@ -38,7 +38,6 @@ export default function Features() {
 
       <div className="relative max-w-5xl mx-auto">
 
-        {/* Section Header */}
         <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-extrabold text-[rgb(var(--color-txt-main))] mb-6">
             Why travel{" "}
@@ -54,7 +53,6 @@ export default function Features() {
         {/* ROADMAP */}
         <div className="relative">
 
-          {/* Static line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-[rgb(var(--color-txt-muted))]/20 md:-translate-x-1/2"></div>
 
           <div className="space-y-16">
@@ -65,7 +63,18 @@ export default function Features() {
                   index % 2 !== 0 ? "md:flex-row-reverse" : ""
                 }`}
               >
-                {/* 1. Content Card */}
+                
+                <img
+                  src={`/illustrations/feature-decor-${index + 1}.png`}
+                  alt=""
+                  className={`
+                    absolute hidden md:block w-70 opacity-90 pointer-events-none
+                    transition-all duration-500
+                    top-1/2 -translate-y-1/2
+                    ${index % 2 === 0 ? "right-[160px]" : "left-[140px]"}
+                  `}
+                />
+
                 <div className="flex-1 w-full md:w-auto">
                   <div className="group p-8 rounded-3xl bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 shadow-lg hover:shadow-orange-500/10 hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
                     
@@ -100,12 +109,10 @@ export default function Features() {
                   </div>
                 </div>
 
-                
                 <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex flex-col items-center">
 
                   <div className="w-1 h-8"></div>
 
-                  {/* Dot */}
                   <div className="relative w-8 h-8 flex items-center justify-center">
                     <div className="w-4 h-4 rounded-full bg-orange-500 shadow-[0_0_0_4px_rgb(var(--color-page))]" />
                     <div className="absolute w-8 h-8 rounded-full border border-orange-500/30 animate-ping" />
@@ -115,7 +122,6 @@ export default function Features() {
 
                 </div>
 
-                {/* 3. Spacer */}
                 <div className="flex-1 hidden md:block" />
               </div>
             ))}

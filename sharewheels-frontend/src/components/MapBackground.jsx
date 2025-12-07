@@ -18,30 +18,23 @@ export default function MapBackground() {
             </filter>
             
             <g filter="url(#shadow)">
-              {/* Wheels (tucked under) */}
               <rect x="4" y="0" width="6" height="2" rx="1" fill="#333" />
               <rect x="30" y="0" width="6" height="2" rx="1" fill="#333" />
               <rect x="4" y="18" width="6" height="2" rx="1" fill="#333" />
               <rect x="30" y="18" width="6" height="2" rx="1" fill="#333" />
 
-              {/* Main Body Paint */}
               <path d="M2,4 Q2,2 4,2 L38,2 Q42,2 42,5 L42,15 Q42,18 38,18 L4,18 Q2,18 2,16 Z" fill="currentColor" />
 
-              {/* Windshields (Dark Glass) */}
               <path d="M10,3 L30,3 L28,17 L10,17 Z" fill="#1a1a1a" opacity="0.8" /> 
               
-              {/* Roof (Body Color lighter) */}
               <rect x="14" y="3" width="12" height="14" fill="currentColor" filter="brightness(1.2)" />
 
-              {/* Side Mirrors */}
               <path d="M10,2 L8,1 L10,3" fill="currentColor" />
               <path d="M10,18 L8,19 L10,17" fill="currentColor" />
 
-              {/* Headlights (Yellow/White) */}
               <path d="M40,3 L41,3 L41,5 L40,5 Z" fill="#fbbf24" />
               <path d="M40,15 L41,15 L41,17 L40,17 Z" fill="#fbbf24" />
               
-              {/* Taillights (Red) */}
               <path d="M2,3 L3,3 L3,5 L2,5 Z" fill="#ef4444" />
               <path d="M2,15 L3,15 L3,17 L2,17 Z" fill="#ef4444" />
             </g>
@@ -50,21 +43,15 @@ export default function MapBackground() {
           
           <symbol id="bike-realistic" viewBox="0 0 30 12">
             <g filter="url(#shadow)">
-              {/* Front Wheel */}
               <rect x="22" y="4" width="4" height="4" rx="1" fill="#333" />
-              {/* Rear Wheel */}
               <rect x="0" y="4" width="6" height="4" rx="1" fill="#333" />
               
-              {/* Body/Tank */}
               <path d="M8,5 L18,5 L20,6 L18,7 L8,7 Z" fill="currentColor" />
               
-              {/* Handlebars */}
               <path d="M18,2 L18,10" stroke="#333" strokeWidth="1.5" strokeLinecap="round" />
               
-              {/* Seat (Black) */}
               <rect x="4" y="5" width="6" height="2" rx="1" fill="#1a1a1a" />
               
-              {/* Rider Helmet */}
               <circle cx="12" cy="6" r="3" fill="#1a1a1a" />
               <circle cx="12" cy="6" r="1.5" fill="white" opacity="0.3" /> 
             </g>
@@ -80,7 +67,6 @@ export default function MapBackground() {
         </g>
 
         
-        {/* CAR 1: White Sedan */}
         <g className="text-gray-100 dark:text-gray-300">
           <use href="#car-realistic" width="30" height="14" x="-15" y="-7">
             <animateMotion dur="14s" repeatCount="indefinite" rotate="auto">
@@ -89,7 +75,6 @@ export default function MapBackground() {
           </use>
         </g>
 
-        {/* CAR 2: Dark Sedan (Vertical) */}
         <g className="text-slate-700 dark:text-slate-500">
           <use href="#car-realistic" width="30" height="14" x="-15" y="-7">
             <animateMotion dur="18s" repeatCount="indefinite" rotate="auto" begin="3s">
@@ -98,7 +83,6 @@ export default function MapBackground() {
           </use>
         </g>
 
-        {/* BIKE 1: Orange Bike (Fast) */}
         <g className="text-orange-500">
           <use href="#bike-realistic" width="20" height="8" x="-10" y="-4">
             <animateMotion dur="9s" repeatCount="indefinite" rotate="auto" begin="0s">
@@ -107,7 +91,6 @@ export default function MapBackground() {
           </use>
         </g>
 
-        {/* CAR 3: Blue Sedan */}
         <g className="text-blue-600 dark:text-blue-500">
           <use href="#car-realistic" width="30" height="14" x="-15" y="-7">
             <animateMotion dur="20s" repeatCount="indefinite" rotate="auto" begin="5s">
@@ -116,7 +99,6 @@ export default function MapBackground() {
           </use>
         </g>
 
-        {/* BIKE 2: Red Bike (Connecting) */}
         <g className="text-red-600">
           <use href="#bike-realistic" width="20" height="8" x="-10" y="-4">
             <animateMotion dur="12s" repeatCount="indefinite" rotate="auto" begin="1s">
