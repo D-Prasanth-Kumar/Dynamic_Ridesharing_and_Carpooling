@@ -35,6 +35,8 @@ public class User {
 
     private boolean otpVerified = false;
 
+    private boolean isBlocked = false;
+
     public User() {
 
     }
@@ -118,4 +120,8 @@ public class User {
     public void setOtpVerified(boolean otpVerified) {
         this.otpVerified = otpVerified;
     }
+
+    public boolean isBlocked() { return isBlocked; }
+
+    public void setBlocked(boolean blocked) { isBlocked = blocked; }
 }

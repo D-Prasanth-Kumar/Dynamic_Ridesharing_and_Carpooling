@@ -69,6 +69,38 @@ public class EmailService {
         }
     }
 
+    public void sendRideCompletedEmail(String passengerEmail, String passengerName,
+                                       String driverName, Long rideId) {
+
+        String reviewLink = "http://localhost:5173/review/" + rideId;
+
+        String subject = "🏁 Ride Completed - Rate " + driverName;
+
+        String content = generateHtmlTemplate(
+                "Ride Completed",
+                "Hello " + passengerName + ",",
+                "Your ride with <b>" + driverName + "</b> has been marked as completed.",
+                "Rate Your Driver",
+                "-", "-", "-", "-",
+                "<p>How was your experience? Please take a moment to leave a review.</p>" +
+                        "<a href='" + reviewLink + "' style='background-color: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;'>Rate Driver</a>"
+        );
+        sendHtmlEmail(passengerEmail, subject, content);
+    }
+
+    public void sendRideCancellationEmail(String passengerEmail, String passengerName, String driverName,
+                                          String source, String destination, String date) {
+        String subject = "⚠ Important: Ride Cancelled - ShareWheels";
+        String content = generateHtmlTemplate(
+                "Ride Cancelled",
+                "Hello " + passengerName + ",",
+                "We regret to inform you that <b>" + driverName + "</b> has cancelled the ride.",
+                driverName, source, destination, "CANCELLED", date,
+                "A full refund (if applicable) will be processed within 5-7 business days."
+        );
+        sendHtmlEmail(passengerEmail, subject, content);
+    }
+
     private String generateHtmlTemplate(String title, String greeting, String mainMessage,
                                         String nameField, String from, String to, String seats, String dateTime, String footerMsg) {
         return """

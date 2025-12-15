@@ -29,6 +29,10 @@ public class Booking {
 
     private Double amountPaid;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "booking_status")
+    private BookingStatus bookingStatus = BookingStatus.CONFIRMED;
+
     public Booking() { }
 
     public Long getId() {
@@ -70,14 +74,22 @@ public class Booking {
     }
 
     public String getBookingSource() { return bookingSource; }
+
     public void setBookingSource(String bookingSource) { this.bookingSource = bookingSource; }
 
     public String getBookingDestination() { return bookingDestination; }
+
     public void setBookingDestination(String bookingDestination) { this.bookingDestination = bookingDestination; }
 
     public String getPaymentId() { return paymentId; }
+
     public void setPaymentId(String paymentId) { this.paymentId = paymentId; }
 
     public Double getAmountPaid() { return amountPaid; }
+
     public void setAmountPaid(Double amountPaid) { this.amountPaid = amountPaid; }
+
+    public BookingStatus getBookingStatus() { return bookingStatus; }
+
+    public void setBookingStatus(BookingStatus bookingStatus) { this.bookingStatus = bookingStatus; }
 }

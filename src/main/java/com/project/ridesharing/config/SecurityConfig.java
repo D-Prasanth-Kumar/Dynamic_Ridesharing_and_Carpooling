@@ -27,6 +27,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/register",
                                 "/api/auth/login",
                                 "/api/auth/verify-otp").permitAll()
+
+                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

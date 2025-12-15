@@ -12,4 +12,10 @@ public interface RideService {
     List<RideResponse> searchRides(String source, String destination, String date);
 
     List<RideResponse> getMyRides(String driverUsername);
+
+    void cancelRide(Long rideId, String username);
+
+    RideResponse updateRide(Long rideId, RideRequest request, String username);
+
+    void completeRide(Long rideId, String username);
 }

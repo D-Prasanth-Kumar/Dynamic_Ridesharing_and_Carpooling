@@ -65,6 +65,7 @@ public class RideRequest {
     }
 
     public String getStops() { return stops; }
+
     public void setStops(String stops) { this.stops = stops; }
 
 }

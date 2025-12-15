@@ -64,6 +64,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("invalid Username or Password"));
 
+        if (user.isBlocked()) {
+            throw new RuntimeException("Your account has been suspended. Contact support.");
+        }
+
         if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid Username or Password");
         }

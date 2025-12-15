@@ -58,7 +58,7 @@ export default function RegisterVehicle() {
         <div className="relative w-full max-w-md bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-8 shadow-xl backdrop-blur-xl transition-colors">
 
           <div className="text-center mb-8">
-            <div className="w-12 h-12 bg-brand-purple/20 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-purple">
+            <div className="w-12 h-12 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center mx-auto mb-4 shadow-md">
               <Car size={24} />
             </div>
             <h2 className="text-2xl font-bold text-[rgb(var(--color-txt-main))]">Add a Vehicle</h2>

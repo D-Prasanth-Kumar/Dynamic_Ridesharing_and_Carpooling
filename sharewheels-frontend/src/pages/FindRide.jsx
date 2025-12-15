@@ -145,7 +145,7 @@ export default function FindRide() {
             },
             prefill: {
                 name: localStorage.getItem('username') || "Passenger",
-                contact: "9999999999" // You can fetch real phone from user profile later
+                contact: "9999999999" // fetch real phone from user profile
             },
             theme: {
                 color: "#3399cc"

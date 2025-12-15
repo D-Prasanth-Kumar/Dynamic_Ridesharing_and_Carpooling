@@ -27,7 +27,12 @@ export default function Login() {
       localStorage.setItem('role', role);
       localStorage.setItem('username', formData.username);
 
-      navigate('/dashboard');
+      if (role === 'ADMIN') {
+        navigate('/admin-dashboard'); 
+      } else {
+        navigate('/dashboard');
+      }
+
     } catch (err) {
       console.error(err);
       setError(err.response?.data || "Invalid username or password.");

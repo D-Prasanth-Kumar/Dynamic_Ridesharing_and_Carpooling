@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { Car, Search, Plus, Calendar, ChevronRight } from "lucide-react";
@@ -8,6 +8,14 @@ export default function Dashboard() {
 
   const username = localStorage.getItem("username");
   const role = localStorage.getItem("role");
+
+  useEffect(() => {
+    if (role === 'ADMIN') {
+        navigate('/admin-dashboard', { replace: true });
+    }
+  }, [role, navigate]);
+
+  if (role === 'ADMIN') return null;
 
   const driverCards = [
     {

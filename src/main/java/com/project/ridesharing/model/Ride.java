@@ -35,6 +35,9 @@ public class Ride {
     @Column(length = 500)
     private String stops;
 
+    @Enumerated(EnumType.STRING)
+    private RideStatus status = RideStatus.SCHEDULED;
+
     public Ride() { }
 
     public Long getId() {
@@ -102,14 +105,22 @@ public class Ride {
     }
 
     public Double getDistanceKm() { return distanceKm; }
+
     public void setDistanceKm(Double distanceKm) { this.distanceKm = distanceKm; }
 
     public Double getPricePerKm() { return pricePerKm; }
+
     public void setPricePerKm(Double pricePerKm) { this.pricePerKm = pricePerKm; }
 
     public Double getTotalFare() { return totalFare; }
+
     public void setTotalFare(Double totalFare) { this.totalFare = totalFare; }
 
     public String getStops() { return stops; }
+
     public void setStops(String stops) { this.stops = stops; }
+
+    public RideStatus getStatus() { return status; }
+
+    public void setStatus(RideStatus status) { this.status = status; }
 }

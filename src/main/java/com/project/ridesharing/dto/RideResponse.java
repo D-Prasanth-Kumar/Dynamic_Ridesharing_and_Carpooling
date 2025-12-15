@@ -11,10 +11,12 @@ public class RideResponse {
     private String date;
     private String time;
     private int availableSeats;
-
     private Double distanceKm;
     private Double pricePerKm;
     private Double totalFare;
+    private String bookingStatus;
+    private String status;
+    private boolean hasReviewed;
 
     public RideResponse() { }
 
@@ -35,12 +37,15 @@ public class RideResponse {
     }
 
     public String getDriverPhone() { return driverPhone; }
+
     public void setDriverPhone(String driverPhone) { this.driverPhone = driverPhone; }
 
     public String getVehicleModel() { return vehicleModel; }
+
     public void setVehicleModel(String vehicleModel) { this.vehicleModel = vehicleModel; }
 
     public String getVehiclePlate() { return vehiclePlate; }
+
     public void setVehiclePlate(String vehiclePlate) { this.vehiclePlate = vehiclePlate; }
 
     public String getSource() {
@@ -106,4 +111,16 @@ public class RideResponse {
     public void setTotalFare(Double totalFare) {
         this.totalFare = totalFare;
     }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
+
+    public String getBookingStatus() { return bookingStatus; }
+
+    public void setBookingStatus(String bookingStatus) { this.bookingStatus = bookingStatus; }
+
+    public boolean isHasReviewed() { return hasReviewed; }
+
+    public void setHasReviewed(boolean hasReviewed) { this.hasReviewed = hasReviewed; }
 }

@@ -12,6 +12,9 @@ import FindRide from './pages/FindRide';
 import MyBookings from './pages/MyBookings';
 import MyRides from './pages/MyRides';
 import PrivateRoute from './components/PrivateRoute';
+import Profile from './pages/Profile';
+import ReviewRide from './pages/ReviewRide';
+import AdminDashboard from './pages/AdminDashboard';
 
 function Home() {
   return (
@@ -66,6 +69,21 @@ function App() {
           <Route
             path="/my-rides"
             element={<PrivateRoute><MyRides /></PrivateRoute>}
+          />
+
+          <Route 
+            path="/profile" 
+            element={<PrivateRoute><Profile /></PrivateRoute>} 
+          />
+
+          <Route 
+            path="/review/:rideId" 
+            element={<PrivateRoute><ReviewRide /></PrivateRoute>} 
+          />
+
+          <Route
+            path="/admin-dashboard" 
+            element={<PrivateRoute><AdminDashboard /></PrivateRoute>}
           />
 
         </Routes>

@@ -11,6 +11,7 @@ import com.project.ridesharing.repository.RideRepository;
 import com.project.ridesharing.repository.UserRepository;
 import com.project.ridesharing.service.NotificationService;
 import com.project.ridesharing.service.EmailService;
+import com.project.ridesharing.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,17 +26,20 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final EmailService emailService;
     private final NotificationService notificationService;
+    private final ReviewRepository reviewRepository;
 
     public BookingServiceImpl(UserRepository userRepository,
                               RideRepository rideRepository,
                               BookingRepository bookingRepository,
                               EmailService emailService,
-                              NotificationService notificationService) {
+                              NotificationService notificationService,
+                              ReviewRepository reviewRepository) {
         this.userRepository = userRepository;
         this.rideRepository = rideRepository;
         this.bookingRepository = bookingRepository;
         this.emailService = emailService;
         this.notificationService = notificationService;
+        this.reviewRepository = reviewRepository;
     }
 
     @Override
@@ -128,7 +132,7 @@ public class BookingServiceImpl implements BookingService {
         User passenger = userRepository.findByUsername(passengerUsername)
                 .orElseThrow(() -> new RuntimeException("Passenger not found"));
 
-        List<Booking> bookings = bookingRepository.findByPassengerId(passenger.getId());
+        List<Booking> bookings = bookingRepository.findByPassengerIdOrderByIdDesc(passenger.getId());
         List<RideResponse> responses = new ArrayList<>();
 
         for(Booking booking : bookings) {
@@ -138,6 +142,7 @@ public class BookingServiceImpl implements BookingService {
             res.setId(ride.getId());
             res.setDriverName(ride.getDriver().getName());
             res.setDriverPhone(ride.getDriver().getPhone());
+            res.setBookingStatus(booking.getBookingStatus().name());
 
             if (ride.getVehicle() != null) {
                 res.setVehicleModel(ride.getVehicle().getModel());
@@ -164,6 +169,9 @@ public class BookingServiceImpl implements BookingService {
             } else {
                 res.setTotalFare(ride.getTotalFare());
             }
+
+            boolean reviewed = reviewRepository.existsByReviewerIdAndRideId(passenger.getId(), ride.getId());
+            res.setHasReviewed(reviewed);
 
             responses.add(res);
         }

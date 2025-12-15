@@ -71,11 +71,9 @@ export default function PostRide() {
         <div className="relative w-full max-w-lg bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-8 shadow-2xl backdrop-blur-xl transition-colors">
 
           <div className="text-center mb-8">
-            <div className="w-12 h-12 bg-gradient-to-br from-brand-blue to-brand-purple rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-lg shadow-brand-purple/30">
+            <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center mx-auto mb-4 shadow-md">
               <Navigation 
                 size={24}
-                strokeWidth={2.4}
-                className="text-slate-900 dark:text-white" 
               />
             </div>
             <h2 className="text-2xl font-bold text-[rgb(var(--color-txt-main))]">Host a Ride</h2>

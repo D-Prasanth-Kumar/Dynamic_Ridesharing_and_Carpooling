@@ -71,4 +71,41 @@ public class RideController {
                 bookingService.getBookingsForRide(rideId, driverUsername)
         );
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateRide(
+            @RequestHeader("Authorization") String authHeader,
+            @PathVariable Long id,
+            @RequestBody RideRequest request) {
+
+        String token = authHeader.substring(7);
+        String username = jwtUtil.getUsernameFromToken(token);
+
+        RideResponse response = rideService.updateRide(id, request, username);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/complete")
+    public ResponseEntity<?> completeRide(
+            @RequestHeader("Authorization") String authHeader,
+            @PathVariable Long id) {
+
+        String token = authHeader.substring(7);
+        String username = jwtUtil.getUsernameFromToken(token);
+
+        rideService.completeRide(id, username);
+        return ResponseEntity.ok("Ride completed. Review emails sent.");
+    }
+
+    @PutMapping("/{rideId}/cancel")
+    public ResponseEntity<?> cancelRide(
+            @RequestHeader("Authorization") String authHeader,
+            @PathVariable Long rideId) {
+
+        String token = authHeader.substring(7);
+        String username = jwtUtil.getUsernameFromToken(token);
+
+        rideService.cancelRide(rideId, username);
+        return ResponseEntity.ok("Ride cancelled successfully. Passengers notified.");
+    }
 }
