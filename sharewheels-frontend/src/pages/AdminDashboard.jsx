@@ -74,13 +74,9 @@ export default function AdminDashboard() {
     }
   };
 
-  // ----------------------------------------
-  // ACTION HANDLERS
-  // ----------------------------------------
-
   const handleViewAllRides = async () => {
     try {
-        console.log("Fetching rides..."); // Debug log
+        console.log("Fetching rides..."); 
         const res = await api.get('/admin/rides');
         setAllRides(res.data || []);
         setIsRidesModalOpen(true);
@@ -96,7 +92,7 @@ export default function AdminDashboard() {
     try {
         await api.put(`/admin/users/${userId}/block`);
         alert("User status updated.");
-        fetchUsersOnly(); // Refresh list to see change
+        fetchUsersOnly(); 
     } catch (err) {
         alert("Failed to update user.");
     }
@@ -251,7 +247,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* ---------------- USERS MODAL ---------------- */}
+      {/* USERS MODAL */}
       {isUsersModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsUsersModalOpen(false)} />
@@ -332,7 +328,7 @@ export default function AdminDashboard() {
                       </td>
 
                       <td className="px-4 py-4">
-                        {/* 🔴 FIXED: Check BOTH blocked OR isBlocked to be safe */}
+                        
                         {(user.blocked || user.isBlocked) ? (
                           <span className="text-red-500 font-bold text-xs flex items-center gap-1">
                             🚫 Blocked
@@ -348,8 +344,7 @@ export default function AdminDashboard() {
                         <button 
                           onClick={() => handleBlockUser(user.id)} 
                           className={`font-bold text-xs hover:underline ${(user.blocked || user.isBlocked) ? "text-emerald-500" : "text-red-500"}`}
-                        >
-                          {/* 🔴 FIXED: Check BOTH here too */}
+                        >                        
                           {(user.blocked || user.isBlocked) ? "Unblock" : "Block"}
                         </button>
                       </td>
@@ -363,7 +358,7 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* ---------------- RIDES MODAL ---------------- */}
+      {/* RIDES MODAL */}
       {isRidesModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsRidesModalOpen(false)} />
@@ -425,7 +420,7 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* ---------------- REVIEW MODAL ---------------- */}
+      {/* REVIEW MODAL */}
       {isReviewModalOpen && (
         <div className="fixed inset-0 z-[120] flex items-center justify-center px-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsReviewModalOpen(false)} />
@@ -466,7 +461,7 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* ---------------- REPORT MODAL ---------------- */}
+      {/* REPORT MODAL */}
       {isReportModalOpen && reportData && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center px-4">
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsReportModalOpen(false)} />
