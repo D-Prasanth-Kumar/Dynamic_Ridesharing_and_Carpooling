@@ -16,6 +16,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState([]);
 
+  // MODALS
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
   const [isRidesModalOpen, setIsRidesModalOpen] = useState(false);
 
@@ -29,6 +30,7 @@ export default function AdminDashboard() {
   // SORTING (used inside users modal)
   const [sortBy, setSortBy] = useState("newest");
 
+  // Reports
   const [reportDates, setReportDates] = useState({ from: '', to: '' });
   const [reportData, setReportData] = useState(null);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
@@ -38,6 +40,7 @@ export default function AdminDashboard() {
     fetchData();
   }, []);
 
+  // Fetch users again when sort changes & modal is open
   useEffect(() => {
     if (isUsersModalOpen) {
       fetchUsersOnly();
@@ -71,13 +74,19 @@ export default function AdminDashboard() {
     }
   };
 
+  // ----------------------------------------
+  // ACTION HANDLERS
+  // ----------------------------------------
+
   const handleViewAllRides = async () => {
     try {
+        console.log("Fetching rides..."); // Debug log
         const res = await api.get('/admin/rides');
         setAllRides(res.data || []);
         setIsRidesModalOpen(true);
     } catch (err) {
-        alert("Failed to load rides.");
+        console.error(err);
+        alert("Failed to load rides. Make sure Backend is restarted!");
     }
   };
 
@@ -87,7 +96,7 @@ export default function AdminDashboard() {
     try {
         await api.put(`/admin/users/${userId}/block`);
         alert("User status updated.");
-        fetchUsersOnly();
+        fetchUsersOnly(); // Refresh list to see change
     } catch (err) {
         alert("Failed to update user.");
     }
@@ -101,11 +110,9 @@ export default function AdminDashboard() {
     
     setReportLoading(true);
     try {
-      
       const res = await api.get(`/admin/report`, {
         params: { from: reportDates.from, to: reportDates.to }
       });
-      
       setReportData(res.data); 
       setIsReportModalOpen(true); 
     } catch (err) {
@@ -126,6 +133,7 @@ export default function AdminDashboard() {
     }
   };
 
+  // FILTERED USERS
   const filteredUsers = users.filter((u) =>
     u.username?.toLowerCase().includes(userSearch.toLowerCase()) ||
     u.email?.toLowerCase().includes(userSearch.toLowerCase()) ||
@@ -143,6 +151,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-[rgb(var(--color-page))] text-[rgb(var(--color-txt-main))] transition-colors">
       <Navbar />
 
+      {/* MAIN CONTENT */}
       <div className="max-w-7xl mx-auto px-6 pt-28 pb-12">
 
         {/* HEADER */}
@@ -159,7 +168,6 @@ export default function AdminDashboard() {
             </p>
           </div>
 
-          {/* Right side — Refresh + Manage Users */}
           <div className="flex items-center gap-3">
             <button
               onClick={fetchData}
@@ -167,7 +175,6 @@ export default function AdminDashboard() {
             >
               Refresh
             </button>
-
             <button
               onClick={() => setIsUsersModalOpen(true)}
               className="px-4 py-2 bg-brand-blue text-white rounded-lg text-sm font-bold hover:opacity-90 transition"
@@ -191,6 +198,7 @@ export default function AdminDashboard() {
           <StatCard icon={<CreditCard />} title={`₹${stats.totalRevenue}`} value="" color="bg-emerald-500" />
         </div>
 
+        {/* CHART + REPORT GENERATOR */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="lg:col-span-1 bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-6 shadow-lg">
             <h3 className="text-xl font-bold mb-4">Ride Activity (Last 7 Days)</h3>
@@ -199,7 +207,7 @@ export default function AdminDashboard() {
                 <BarChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
                   <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
-                  <Tooltip />
+                  <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
                   <Bar dataKey="rides" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={40} />
                 </BarChart>
               </ResponsiveContainer>
@@ -207,18 +215,14 @@ export default function AdminDashboard() {
           </div>
 
           <div className="bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl p-6 shadow-lg">
-
             <h4 className="text-lg font-semibold mb-1">Generate Report</h4>
             <p className="text-sm text-[rgb(var(--color-txt-dim))] mb-6">
               Select a date range to generate financial & ride reports
             </p>
 
             <div className="flex flex-col gap-4">
-
               <div>
-                <label className="block text-xs font-bold text-[rgb(var(--color-txt-dim))] uppercase mb-1">
-                  From Date
-                </label>
+                <label className="block text-xs font-bold text-[rgb(var(--color-txt-dim))] uppercase mb-1">From Date</label>
                 <input
                   type="date"
                   value={reportDates.from}
@@ -226,11 +230,8 @@ export default function AdminDashboard() {
                   className="w-full rounded-lg px-4 py-2 border border-[rgb(var(--color-txt-muted))]/20 bg-[rgb(var(--color-page))] text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
-
               <div>
-                <label className="block text-xs font-bold text-[rgb(var(--color-txt-dim))] uppercase mb-1">
-                  To Date
-                </label>
+                <label className="block text-xs font-bold text-[rgb(var(--color-txt-dim))] uppercase mb-1">To Date</label>
                 <input
                   type="date"
                   value={reportDates.to}
@@ -238,40 +239,29 @@ export default function AdminDashboard() {
                   className="w-full rounded-lg px-4 py-2 border border-[rgb(var(--color-txt-muted))]/20 bg-[rgb(var(--color-page))] text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
-
               <button 
                 onClick={handleGenerateReport}
                 disabled={reportLoading}
                 className="mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {reportLoading ? (
-                   <>Processing...</>
-                ) : (
-                   <>Generate Report <Filter size={16}/></>
-                )}
+                {reportLoading ? <>Processing...</> : <>Generate Report <Filter size={16}/></>}
               </button>
-
             </div>
           </div>
-
         </div>
       </div>
 
+      {/* ---------------- USERS MODAL ---------------- */}
       {isUsersModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsUsersModalOpen(false)} />
-
           <div className="relative w-full max-w-5xl bg-[rgb(var(--color-card))] rounded-2xl shadow-2xl border border-[rgb(var(--color-txt-muted))]/20 p-6 max-h-[85vh] flex flex-col overflow-hidden">
-
+            
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 border-b border-[rgb(var(--color-txt-muted))]/20 pb-4">
-
               <h3 className="text-2xl font-bold flex items-center gap-3">
                 <Users size={24} className="text-blue-500" /> User Management
               </h3>
-
               <div className="flex items-center gap-3 w-full md:w-auto">
-
                 <div className="relative">
                   <Filter className="absolute left-3 top-2.5 text-[rgb(var(--color-txt-dim))]" size={16} />
                   <select 
@@ -285,7 +275,6 @@ export default function AdminDashboard() {
                     <option value="rating">Highest Rated</option>
                   </select>
                 </div>
-
                 <input
                   type="text"
                   placeholder="Search users..."
@@ -293,11 +282,9 @@ export default function AdminDashboard() {
                   onChange={(e) => setUserSearch(e.target.value)}
                   className="px-4 py-2 rounded-lg bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 w-full md:w-48"
                 />
-
                 <button onClick={() => setIsUsersModalOpen(false)}>
                   <X size={24} className="hover:text-red-500 transition" />
                 </button>
-
               </div>
             </div>
 
@@ -337,7 +324,6 @@ export default function AdminDashboard() {
                           <Star size={14} className="fill-yellow-500 text-yellow-500" />
                           {user.averageRating || "N/A"}
                         </div>
-
                         {user.averageRating > 0 && (
                           <button onClick={() => handleViewReviews(user.id)} className="text-blue-500 hover:underline text-[10px] mt-1">
                             See Reviews
@@ -346,7 +332,8 @@ export default function AdminDashboard() {
                       </td>
 
                       <td className="px-4 py-4">
-                        {user.isBlocked ? (
+                        {/* 🔴 FIXED: Check BOTH blocked OR isBlocked to be safe */}
+                        {(user.blocked || user.isBlocked) ? (
                           <span className="text-red-500 font-bold text-xs flex items-center gap-1">
                             🚫 Blocked
                           </span>
@@ -360,9 +347,10 @@ export default function AdminDashboard() {
                       <td className="px-4 py-4">
                         <button 
                           onClick={() => handleBlockUser(user.id)} 
-                          className={`font-bold text-xs hover:underline ${user.isBlocked ? "text-emerald-500" : "text-red-500"}`}
+                          className={`font-bold text-xs hover:underline ${(user.blocked || user.isBlocked) ? "text-emerald-500" : "text-red-500"}`}
                         >
-                          {user.isBlocked ? "Unblock" : "Block"}
+                          {/* 🔴 FIXED: Check BOTH here too */}
+                          {(user.blocked || user.isBlocked) ? "Unblock" : "Block"}
                         </button>
                       </td>
 
@@ -371,19 +359,15 @@ export default function AdminDashboard() {
                 </tbody>
               </table>
             </div>
-
           </div>
-
         </div>
       )}
 
+      {/* ---------------- RIDES MODAL ---------------- */}
       {isRidesModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-          
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsRidesModalOpen(false)} />
-
           <div className="relative w-full max-w-5xl bg-[rgb(var(--color-card))] rounded-2xl shadow-2xl border border-[rgb(var(--color-txt-muted))]/20 p-6 max-h-[85vh] flex flex-col overflow-hidden">
-
             <div className="flex justify-between items-center mb-6 border-b border-[rgb(var(--color-txt-muted))]/20 pb-4">
               <h3 className="text-2xl font-bold flex items-center gap-3">
                 <Car size={24} className="text-purple-500" /> Master Ride History
@@ -392,7 +376,6 @@ export default function AdminDashboard() {
                 <X size={24} className="hover:text-red-500 transition" />
               </button>
             </div>
-
             <div className="flex-1 overflow-y-auto">
               <table className="w-full text-sm border-collapse">
                 <thead className="sticky top-0 bg-white/5 backdrop-blur-md text-xs uppercase text-[rgb(var(--color-txt-dim))]">
@@ -405,20 +388,14 @@ export default function AdminDashboard() {
                     <th className="px-4 py-3 text-right">Fare</th>
                   </tr>
                 </thead>
-
                 <tbody className="divide-y divide-[rgb(var(--color-txt-muted))]/10">
                   {allRides.map((ride) => (
                     <tr key={ride.id} className="hover:bg-white/5 transition">
-
-                      <td className="px-4 py-4 font-mono text-xs text-[rgb(var(--color-txt-dim))]">
-                        #{ride.id}
-                      </td>
-
+                      <td className="px-4 py-4 font-mono text-xs text-[rgb(var(--color-txt-dim))]">#{ride.id}</td>
                       <td className="px-4 py-4">
                         <p className="font-bold">{ride.driverName}</p>
                         <p className="text-xs text-[rgb(var(--color-txt-dim))]">{ride.vehicleModel}</p>
                       </td>
-
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
                           <span className="font-medium">{ride.source}</span>
@@ -426,72 +403,43 @@ export default function AdminDashboard() {
                           <span className="font-medium">{ride.destination}</span>
                         </div>
                       </td>
-
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2 text-xs text-[rgb(var(--color-txt-dim))]">
                           <Calendar size={12} /> {ride.date}
                         </div>
                       </td>
-
                       <td className="px-4 py-4">
-                        {/* COMPLETED */}
-                        {ride.status === 'COMPLETED' && (
-                          <span className="px-2 py-1 rounded text-xs font-bold bg-emerald-500/10 text-emerald-500 flex items-center gap-1">
-                            <CheckCircle size={12} /> DONE
-                          </span>
-                        )}
-
-                        {/* CANCELLED */}
-                        {ride.status === 'CANCELLED' && (
-                          <span className="px-2 py-1 rounded text-xs font-bold bg-red-500/10 text-red-500 flex items-center gap-1">
-                            <X size={12} /> CANCELLED
-                          </span>
-                        )}
-
-                        {/* ACTIVE */}
-                        {ride.status === 'SCHEDULED' && (
-                          <span className="px-2 py-1 rounded text-xs font-bold bg-blue-500/10 text-blue-500 flex items-center gap-1">
-                            <Clock size={12} /> ACTIVE
-                          </span>
-                        )}
+                        {ride.status === 'COMPLETED' && <span className="px-2 py-1 rounded text-xs font-bold bg-emerald-500/10 text-emerald-500 flex items-center gap-1"><CheckCircle size={12} /> DONE</span>}
+                        {ride.status === 'CANCELLED' && <span className="px-2 py-1 rounded text-xs font-bold bg-red-500/10 text-red-500 flex items-center gap-1"><X size={12} /> CANCELLED</span>}
+                        {ride.status === 'SCHEDULED' && <span className="px-2 py-1 rounded text-xs font-bold bg-blue-500/10 text-blue-500 flex items-center gap-1"><Clock size={12} /> ACTIVE</span>}
                       </td>
-
                       <td className="px-4 py-4 text-right font-bold">
                         {ride.totalFare ? `₹${Math.round(ride.totalFare)}` : "-"}
                       </td>
-
                     </tr>
                   ))}
                 </tbody>
-
               </table>
             </div>
-
           </div>
         </div>
       )}
 
+      {/* ---------------- REVIEW MODAL ---------------- */}
       {isReviewModalOpen && (
         <div className="fixed inset-0 z-[120] flex items-center justify-center px-4">
-
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsReviewModalOpen(false)} />
-
           <div className="relative w-full max-w-lg bg-[rgb(var(--color-card))] rounded-2xl shadow-2xl border border-[rgb(var(--color-txt-muted))]/20 p-6 max-h-[80vh] flex flex-col overflow-hidden">
-
             <div className="flex justify-between items-center mb-4 border-b border-[rgb(var(--color-txt-muted))]/20 pb-4">
               <h3 className="text-xl font-bold flex items-center gap-2">
                 <MessageSquare size={20} className="text-brand-purple" /> User Reviews
               </h3>
-              <button onClick={() => setIsReviewModalOpen(false)}>
-                <X size={20} />
-              </button>
+              <button onClick={() => setIsReviewModalOpen(false)}><X size={20} /></button>
             </div>
-
             <div className="flex-1 overflow-y-auto space-y-4 pr-2">
               {selectedUserReviews?.length > 0 ? (
                 selectedUserReviews.map((review) => (
                   <div key={review.id} className="p-4 bg-white/5 border border-[rgb(var(--color-txt-muted))]/20 rounded-xl">
-                    
                     <div className="flex justify-between items-start mb-2">
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">
@@ -499,41 +447,30 @@ export default function AdminDashboard() {
                         </div>
                         <div>
                           <p className="text-sm font-bold">{review.reviewerName || "Anonymous"}</p>
-                          <p className="text-[10px] text-[rgb(var(--color-txt-dim))]">
-                            {review.timestamp ? new Date(review.timestamp).toLocaleDateString() : ""}
-                          </p>
+                          <p className="text-[10px] text-[rgb(var(--color-txt-dim))]">{review.timestamp ? new Date(review.timestamp).toLocaleDateString() : ""}</p>
                         </div>
                       </div>
-
                       <div className="flex items-center gap-1 bg-yellow-500/10 px-2 py-1 rounded-lg">
                         <Star size={12} className="fill-yellow-500 text-yellow-500" />
                         <span className="text-xs font-bold text-yellow-500">{review.rating}</span>
                       </div>
                     </div>
-
-                    <p className="text-sm text-[rgb(var(--color-txt-main))] italic">
-                      "{review.comment}"
-                    </p>
-
+                    <p className="text-sm text-[rgb(var(--color-txt-main))] italic">"{review.comment}"</p>
                   </div>
                 ))
               ) : (
-                <p className="text-center text-[rgb(var(--color-txt-dim))] py-10">
-                  No reviews found for this user.
-                </p>
+                <p className="text-center text-[rgb(var(--color-txt-dim))] py-10">No reviews found for this user.</p>
               )}
             </div>
-
           </div>
         </div>
       )}
 
+      {/* ---------------- REPORT MODAL ---------------- */}
       {isReportModalOpen && reportData && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center px-4">
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsReportModalOpen(false)} />
-            
             <div className="relative w-full max-w-4xl bg-[rgb(var(--color-card))] border border-[rgb(var(--color-txt-muted))]/20 rounded-2xl shadow-2xl p-6 overflow-hidden max-h-[85vh] flex flex-col">
-                
                 <div className="flex justify-between items-center mb-6 border-b border-[rgb(var(--color-txt-muted))]/20 pb-4">
                     <div>
                         <h3 className="text-2xl font-bold flex items-center gap-2">
@@ -545,7 +482,6 @@ export default function AdminDashboard() {
                     </div>
                     <button onClick={() => setIsReportModalOpen(false)}><X size={24} /></button>
                 </div>
-
                 <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="bg-purple-500/10 border border-purple-500/20 p-4 rounded-xl text-center">
                         <p className="text-xs text-purple-500 font-bold uppercase">Total Rides</p>
@@ -556,7 +492,6 @@ export default function AdminDashboard() {
                         <p className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">₹{reportData.totalRevenue}</p>
                     </div>
                 </div>
-
                 <div className="flex-1 overflow-y-auto">
                     <table className="w-full text-sm text-left border-collapse">
                         <thead className="sticky top-0 bg-white/5 backdrop-blur-md text-xs uppercase text-[rgb(var(--color-txt-dim))]">
@@ -604,7 +539,6 @@ export default function AdminDashboard() {
     </div>
   );
 }
-
 
 function StatCard({ icon, title, value, color }) {
   return (
