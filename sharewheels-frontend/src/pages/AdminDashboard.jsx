@@ -404,9 +404,9 @@ export default function AdminDashboard() {
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        {ride.status === 'COMPLETED' && <span className="px-2 py-1 rounded text-xs font-bold bg-emerald-500/10 text-emerald-500 flex items-center gap-1"><CheckCircle size={12} /> DONE</span>}
-                        {ride.status === 'CANCELLED' && <span className="px-2 py-1 rounded text-xs font-bold bg-red-500/10 text-red-500 flex items-center gap-1"><X size={12} /> CANCELLED</span>}
-                        {ride.status === 'SCHEDULED' && <span className="px-2 py-1 rounded text-xs font-bold bg-blue-500/10 text-blue-500 flex items-center gap-1"><Clock size={12} /> ACTIVE</span>}
+                        {ride.status === 'COMPLETED' && <span className="inline-flex w-fit items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold bg-emerald-500/10 text-emerald-500"><CheckCircle size={12} /> DONE</span>}
+                        {ride.status === 'CANCELLED' && <span className="inline-flex w-fit items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold bg-red-500/10 text-red-500"><X size={12} /> CANCELLED</span>}
+                        {ride.status === 'SCHEDULED' && <span className="inline-flex w-fit items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold bg-blue-500/10 text-blue-500"><Clock size={12} /> ACTIVE</span>}
                       </td>
                       <td className="px-4 py-4 text-right font-bold">
                         {ride.totalFare ? `₹${Math.round(ride.totalFare)}` : "-"}

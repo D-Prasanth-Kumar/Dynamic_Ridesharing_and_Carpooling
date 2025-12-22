@@ -213,7 +213,7 @@ public class RideServiceImpl implements RideService {
         }
 
         if (ride.getStatus() != com.project.ridesharing.model.RideStatus.SCHEDULED) {
-            throw new RuntimeException("Ride cannot be completed (Current status: " + ride.getStatus() + ")");
+            throw new RuntimeException("Ride cannot be completed");
         }
 
         ride.setStatus(com.project.ridesharing.model.RideStatus.COMPLETED);
@@ -222,7 +222,6 @@ public class RideServiceImpl implements RideService {
         List<Booking> bookings = bookingRepository.findByRideId(rideId);
 
         for (Booking booking : bookings) {
-
             booking.setBookingStatus(BookingStatus.COMPLETED);
             bookingRepository.save(booking);
 
@@ -231,14 +230,17 @@ public class RideServiceImpl implements RideService {
                         booking.getPassenger().getEmail(),
                         booking.getPassenger().getName(),
                         ride.getDriver().getName(),
-                        ride.getId()
+                        booking.getId(),
+                        ride.getSource(),
+                        ride.getDestination(),
+                        booking.getSeatsBooked(),
+                        ride.getTime().toString()
                 );
             } catch (Exception e) {
                 System.err.println("Failed to send review email: " + e.getMessage());
             }
 
             String msg = "Ride Completed: Your trip to " + ride.getDestination() + " is finished. Please rate your driver.";
-
             notificationService.createNotification(
                     booking.getPassenger(),
                     "Ride Completed. Please rate your driver."

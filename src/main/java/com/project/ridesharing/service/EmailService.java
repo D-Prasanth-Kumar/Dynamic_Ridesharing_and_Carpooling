@@ -70,18 +70,22 @@ public class EmailService {
     }
 
     public void sendRideCompletedEmail(String passengerEmail, String passengerName,
-                                       String driverName, Long rideId) {
+                                       String driverName, Long rideId,
+                                       String source, String destination, int seats, String time) {
 
         String reviewLink = "http://localhost:5173/review/" + rideId;
 
-        String subject = "🏁 Ride Completed - Rate " + driverName;
+        String subject = " Ride Completed - Rate " + driverName;
 
         String content = generateHtmlTemplate(
                 "Ride Completed",
                 "Hello " + passengerName + ",",
                 "Your ride with <b>" + driverName + "</b> has been marked as completed.",
-                "Rate Your Driver",
-                "-", "-", "-", "-",
+                driverName,
+                source,
+                destination,
+                seats + " Seat(s)",
+                time,
                 "<p>How was your experience? Please take a moment to leave a review.</p>" +
                         "<a href='" + reviewLink + "' style='background-color: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px;'>Rate Driver</a>"
         );
